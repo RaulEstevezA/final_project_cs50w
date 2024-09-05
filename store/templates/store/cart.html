@@ -1,0 +1,79 @@
+{% extends 'store/layout.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-4 mb-4">
+    <h1 class="text-center">Your Cart</h1>
+    {% if not order_items %}
+        <br><br>
+        <p>Your cart is empty.</p>
+    {% else %}
+        <br><br>
+        <div class="cart-items">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cart-header">
+                        <div class="row">
+                            <div class="col-md-7 col-sm-6"><h4>Product</h4></div>
+                            <div class="col-md-1 col-sm-2"><h4>Quantity</h4></div>
+                            <div class="col-md-1 col-sm-2"></div>
+                            <div class="col-md-1 col-sm-2"><h4>Price</h4></div>
+                            <div class="col-md-1 col-sm-2"><h4>Subtotal</h4></div>
+                            <div class="col-md-1 col-sm-2"></div>
+                        </div>
+                    </div>
+                    {% for item in order_items %}
+                    <div class="cart-item">
+                        <div class="row align-items-start">
+                            <div class="col-md-7 col-sm-6">
+                                <div class="cart-product-name"><a href="{% url 'store:product_view' category_name=item.content_object.category.name product_id=item.content_object.id %}" class="product-link">
+                                    {{ item.content_object.title }}
+                                </a></div>
+                            </div>
+                            <div class="col-md-1 col-sm-2">
+                                <input type="number" class="form-control quantity-input" value="{{ item.quantity }}" min="1" max="{{ item.max_units }}" data-item-id="{{ item.id }}">
+                            </div>
+                            <div class="col-md-1 col-sm-2"></div>
+                            <div class="col-md-1 col-sm-2">
+                                <div class="cart-price">${{ item.price|floatformat:2 }}</div>
+                            </div>
+                            <div class="col-md-1 col-sm-2">
+                                <div class="cart-total">${{ item.quantity|multiply:item.price|floatformat:2 }}</div>
+                            </div>
+                            <div class="col-md-1 col-sm-2">
+                                <button class="btn btn-outline-danger btn-sm" data-item-id="{{ item.id }}">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <br>
+                    <div class="cart-footer">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-6 text-end"><h4>Total:</h4></div>
+                            <div class="col-md-2 col-sm-3"></div>
+                            <div class="col-md-2 col-sm-3"><h4>${{ cart_total|floatformat:2 }}</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-actions mt-4 text-center">
+            <div class="row">
+                <div class="col-md-8 col-sm-6"></div>
+                <div class="col-md-2 col-sm-3">
+                    <button id="clear-cart-button" class="btn btn-danger btn-sm">Clear Cart</button>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                    <a href="{% url 'store:checkout' %}" class="btn btn-outline-secondary btn-sm">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>       
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
+
+
+

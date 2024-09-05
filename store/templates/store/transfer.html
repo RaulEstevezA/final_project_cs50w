@@ -1,0 +1,21 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<div class="container mt-4 mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2>Transfer Payment Instructions</h2>
+            <br>
+            <p>Please transfer the amount to the following bank account:</p>
+            <p><strong>Bank Account Number:</strong> 1234567890</p>
+            <p>Make sure to include the following order number in the payment reference:</p>
+            <p><strong>Order Number:</strong> {{ order.id }}</p>
+            <p>Once the transfer is complete, please allow some time for the payment to be confirmed.</p>
+            <div class="text-center">
+                <a href="{% url 'store:orders' %}" class="btn btn-outline-secondary btn-lg mt-4">View Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

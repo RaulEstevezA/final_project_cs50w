@@ -1,0 +1,15 @@
+<!-- payment_success.html -->
+
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Payment Successful</h1>
+    <br>
+    <p>Thank you for your purchase. Your payment has been processed successfully.</p>
+    <div class="text-center">
+        <a href="{% url 'store:orders' %}" class="btn btn-outline-secondary btn-lg mt-4">View Orders</a>
+    </div>
+</div>
+{% endblock %}
+

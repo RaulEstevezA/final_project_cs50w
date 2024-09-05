@@ -1,0 +1,110 @@
+/* home.html styles */
+
+/* style for links */
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-link img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* carousel style styles */
+.carousel-caption {
+    color: #000;
+    border-radius: 0.25rem;
+    padding: 1rem;
+}
+
+.carousel {
+    margin-top: 40px; 
+    display: flex;
+}
+
+.carousel-item img {
+    max-height: 400px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        max-height: 250px; 
+    }
+
+    .carousel-caption {
+        position: absolute;
+        bottom: 10px; 
+        left: 50%;
+        transform: translateX(-50%); 
+        width: 100%; 
+        padding-left: 10px; 
+        padding-right: 10px;
+        text-align: center; 
+        background: rgba(0, 0, 0, 0.5); 
+        color: #fff;
+        font-size: 0.8rem; 
+    }
+
+    .carousel-container {
+        padding-top: 10px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-caption {
+        font-size: 0.7rem; 
+        bottom: 5px;
+    }
+}
+
+.carousel-item .text-container {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.title-offert {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.discount-offert {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.price-text-carrusel {
+    color: #333;
+    font-size: 1.25rem;
+    margin-top: 10px;
+}
+
+.home-title {
+    font-family: "Rowdies", sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #F7FF40;
+    text-shadow: 
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+    white-space: nowrap;
+}
+
+.home-title {
+    display: flex;
+    justify-content: left;
+    align-items: center; 
+    height: 140px;
+    margin-left: 6rem;
+}

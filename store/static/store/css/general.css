@@ -1,0 +1,70 @@
+/* general CSS */
+
+* {
+    box-sizing: border-box; 
+}
+
+body, h1, h2, h3, p, ul, ol, li, img {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.site-title {
+    font-family: "Rowdies", sans-serif;
+    font-size: 60px;
+    text-align: center;
+    color: #F7FF40;
+    text-shadow: 
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+    white-space: nowrap;
+}
+.title {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 140px;
+}
+
+/* General button styling */
+.btn {
+    white-space: nowrap;     
+    overflow: hidden;         
+    text-overflow: ellipsis;  
+    display: inline-block;    
+    max-width: 100%;          
+}
+
+/* Ensure buttons are responsive */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+}
+
+/* Adjust button font-size and padding for smaller screens */
+@media (max-width: 576px) {
+    .btn {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem;
+    }
+}
+
+
+ul, li, a, img {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}

@@ -1,0 +1,145 @@
+{% extends 'store/layout.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-4 mb-4">
+    <div class="row">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <!-- Left Side: List of Products -->
+        <div class="col-md-9">
+            <h2>Review Your Order</h2>
+            <br>
+            <div class="cart-items">
+                <div class="cart-header">
+                    <div class="row">
+                        <div class="col-md-7"><h4>Product</h4></div>
+                        <div class="col-md-1"><h4>Quantity</h4></div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1"><h4>Price</h4></div>
+                        <div class="col-md-1"><h4>Subtotal</h4></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                {% for item in order_items %}
+                <div class="cart-item">
+                    <div class="row align-items-start">
+                        <div class="col-md-7">
+                            <div class="cart-product-name">
+                                <a href="{% url 'store:product_view' category_name=item.content_object.category.name product_id=item.content_object.id %}" class="product-link">
+                                    {{ item.content_object.title }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="cart-quantity">{{ item.quantity }}</div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <div class="cart-price">${{ item.price }}</div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="cart-total">${{ item.quantity|multiply:item.price }}</div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                {% endfor %}
+                <br>
+                <div class="cart-footer">
+                    <div class="row">
+                        <div class="col-md-8 text-end"><h4>Total:</h4></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2"><h4>${{ cart_total }}</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Right Side: Shipping Information -->
+        <div class="col-md-3">
+            {% if user.is_authenticated %}
+                {% if shipping_address %}
+                    <h2>Shipping Address</h2>
+                    <br>
+                    <p>{{ shipping_address.recipient_name }}</p>
+                    <p>{{ shipping_address.full_address }}</p>
+                    <p>{{ shipping_address.city }}, {{ shipping_address.zip_code }}</p>
+                    <p>{{ shipping_address.country }}</p>
+                    <div class="checkout-action mt-4 text-center">
+                        <form id="paymentForm" method="post" action="{% url 'store:process_payment' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <select class="form-select" name="payment_method" id="payment_method" required>
+                                    <option value="1" disabled selected>Select Payment Method</option>
+                                    <option value="credit_card">Credit Card</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="transfer">Transfer</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-outline-secondary btn-lg mt-4" id="proceedToPaymentButton">Proceed to Payment</button>
+                        </form>
+                    </div>
+
+                    <div class="mt-4">
+                        <h5>PayPal Sandbox Testing Information</h5>
+                        <p>To test the PayPal payment method, you can use the following sandbox accounts:</p>
+                        <ul>
+                            <li>Account: <strong>sb-9we9k30933294@personal.example.com</strong></li>
+                            <li>Password: <strong>4tP&j^$8</strong></li>
+                        </ul>
+                        <p>Use these credentials when prompted during the PayPal login process. Note that these accounts are for testing purposes only and do not represent real financial transactions.</p>
+                    </div>                    
+                {% else %}
+                    <h2>Add Shipping Address</h2>
+                    <br>
+                    <form id="shippingAddressForm">
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" id="recipient_name" placeholder="Recipient Name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" id="full_address" placeholder="Address" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" id="city" placeholder="City" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" id="zip_code" placeholder="Zip Code" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" id="country" placeholder="Country" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-outline-secondary btn-lg" id="saveAddressButton">Save Address</button>
+                        </div>
+                    </form>                                        
+                {% endif %}
+            {% else %}
+                <div class="alert alert-warning">
+                    <p>Please <a href="{% url 'store:login' %}">login</a> or <a href="{% url 'store:register' %}">register</a> to proceed with your order.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

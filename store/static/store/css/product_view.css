@@ -1,0 +1,128 @@
+/* Margins for container */
+.container {
+    margin: 20px auto;
+}
+
+/* Style for the product title */
+.product-title {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Style for the main image */
+.main-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/* Style for the more images section */
+.more-images {
+    text-align: center;
+}
+
+.product-view-carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-view-carousel {
+    overflow: hidden;
+    width: 320px; 
+}
+
+.product-view-thumbnail-container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-view-thumbnail {
+    width: 100px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.product-view-carousel-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+}
+
+/* Style for the product details */
+.product-details {
+    margin-top: 20px;
+}
+
+.details-container {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.detail-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.detail-item:nth-child(odd) {
+    border-right: 1px solid #ccc;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item:nth-child(2n) {
+    border-right: none;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* style for prices */
+.discount-text {
+    color: red;
+    font-weight: bold;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: grey; 
+}
+
+/* style input quantity */
+#quantity {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+/* style for wishlist */
+.wishlist-button {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.wishlist-button.in-wishlist {
+    background-color: #F7FF40;
+    border-color: #ccc;
+}
+
+
+
+

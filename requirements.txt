@@ -1,0 +1,7 @@
+pip install Pillow
+pip install paypalrestsdk
+
+PayPal example acount
+Account: sb-9we9k30933294@personal.example.com
+Password: 4tP&j^$8
+

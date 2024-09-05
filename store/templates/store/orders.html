@@ -1,0 +1,35 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Your Orders</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Date</th>
+                        <th>Payment Method</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr onclick="window.location='{% url 'store:order_detail' order.id %}'" style="cursor: pointer;">
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
+                        <td>{{ order.get_payment_method_display }}</td>
+                        <td>{{ order.get_status_display }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

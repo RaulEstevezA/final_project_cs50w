@@ -1,0 +1,17 @@
+/* style for cart.html */
+
+
+.cart-item {
+    padding: 15px 0; 
+    border-bottom: 1px solid #ddd; 
+}
+
+.cart-item:last-child {
+    border-bottom: none; 
+}
+
+.product-link {
+    color: inherit; 
+    text-decoration: none; 
+}
+

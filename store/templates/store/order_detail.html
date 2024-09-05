@@ -1,0 +1,50 @@
+{% extends 'store/layout.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Order Details</h2>
+            <br>
+            <p><strong>Order Number:</strong> {{ order.id }}</p>
+            <p><strong>Date:</strong> {{ order.created_at|date:"Y-m-d H:i" }}</p>
+            <p><strong>Payment Method:</strong> {{ order.get_payment_method_display }}</p>
+            <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+            
+            {% if order.payment_method == 'TRANSFER' %}
+            <p><strong>Bank Account Number:</strong> {{ order.bank_account_number }}</p>
+            {% endif %}
+            <br>
+            <h3>Items</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order_items %}
+                    <tr onclick="window.location='{% url 'store:product_view' category_name=item.content_object.category.name product_id=item.content_object.id %}'" style="cursor: pointer;">
+                        <td>{{ item.content_object.title }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.price_at_purchase }}</td>
+                        <td>${{ item.quantity|multiply:item.price_at_purchase }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" class="text-end"><strong><h4>Total:</h4></strong></td>
+                        <td><h5>${{ order_items|sum_subtotals }}</h5></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

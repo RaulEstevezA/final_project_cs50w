@@ -1,0 +1,13 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Payment Error</h1>
+    <br>
+    <p>There was an error processing your payment: {{ error.message }}</p>
+    <div class="text-center mt-4">
+        <a href="{% url 'store:home' %}" class="btn btn-outline-secondary btn-lg">Return to Home Page</a>
+    </div>
+</div>
+{% endblock %}
+

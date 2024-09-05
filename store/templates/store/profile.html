@@ -1,0 +1,115 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="w-100" style="max-width: 600px;">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <h2 class="h2 mb-3 fw-bold">User Profile</h2>
+
+        <!-- Account Information with Update Button -->
+        <div class="mb-4">
+            <h3 class="h3 mb-3 fw-bold">Account Information</h3>
+            <div id="accountInfoForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" value="{{ user.username }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" value="{{ user.email }}">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" value="{{ user.profile.phone }}">
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password to Update</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Enter your password">
+                </div>
+                <button id="updateAccountInfoBtn" type="button" class="btn btn-outline-secondary">Update Account Info</button>
+            </div>
+        </div>
+
+        <!-- Existing Shipping Addresses -->
+        <div class="mb-4">
+            <h3 class="h3 mb-3 fw-bold">Shipping Addresses</h3>
+            {% for address in user.profile.shipping_addresses.all %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class="card-text">{{ address.recipient_name }}, {{ address.full_address }}, {{ address.city }}, {{ address.zip_code }}, {{ address.country }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p>No shipping addresses added yet.</p>
+            {% endfor %}
+            <button class="btn btn-outline-secondary mb-3" id="addAddressBtn">Add or Modify Address</button>
+        </div>
+
+
+        <!-- Add or Modify Shipping Address -->
+        <div class="mb-4" id="newAddressForm" style="display:none;">
+            <h3 class="h3 mb-3 fw-bold">Add New Shipping Address</h3>
+            <form id="shippingAddressForm">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="recipientNameInput" name="recipient_name" placeholder="Recipient Name" required>
+                    <label for="recipientNameInput">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="addressInput" name="address" placeholder="Enter your address" required>
+                    <label for="addressInput">Address</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="cityInput" name="city" placeholder="City" required>
+                    <label for="cityInput">City</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="zipCodeInput" name="zip_code" placeholder="Zip Code" required>
+                    <label for="zipCodeInput">Zip Code</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="countryInput" name="country" placeholder="Country" required>
+                    <label for="countryInput">Country</label>
+                </div>
+                <button id="saveNewAddressBtn" type="button" class="btn btn-outline-secondary">Save New Address</button>
+            </form>
+        </div>
+
+        <!-- Change Password -->
+        <div class="mb-4">
+            <h3 class="h3 mb-3 fw-bold">Change Password</h3>
+            <div id="changePasswordForm">
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="oldPassword" placeholder="Current Password" required>
+                    <label for="oldPassword">Current Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="newPassword" placeholder="New Password" required>
+                    <label for="newPassword">New Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirm New Password" required>
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                </div>
+                <button type="button" class="btn btn-outline-secondary" id="changePasswordBtn">Change Password</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+

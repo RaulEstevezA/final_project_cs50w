@@ -1,0 +1,71 @@
+/* styles for category_search */
+
+.category_title, .search_title {
+  display: flex;
+  justify-content: left;
+  align-items: center; 
+  height: 140px;
+  margin-left: 6rem;
+  font-family: "Rowdies", sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #F7FF40;
+  text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+  white-space: nowrap;
+}
+
+
+/* styles for tarjet of item */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+
+.card-body {
+  padding: 15px;
+}
+
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+
+.card-text {
+  color: #333;
+  font-size: 1.25rem;
+}
+
+
+/* styles for discount */
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.discount-text {
+  color: red;
+  font-weight: bold;
+}
+
+
+.price-text {
+  margin-left: auto;
+  color: #333;
+  font-size: 1.25rem;
+}

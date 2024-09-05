@@ -1,0 +1,84 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<div class="container mt-4 mb-4">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ main_image }}" alt="{{ product.name }}" class="img-fluid main-image">
+            <div class="more-images mt-3">
+                <div class="product-view-carousel-container">
+                    <button class="product-view-carousel-button product-view-prev-button">&lt;</button>
+                    <div class="product-view-carousel">
+                        <div class="product-view-thumbnail-container">
+                            {% for image in images %}
+                            <img src="{{ image.image.url }}" alt="Extra image for {{ product.name }}" class="product-view-thumbnail">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <button class="product-view-carousel-button product-view-next-button">&gt;</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div><h1>{{ product.name }}</h1></div><br>
+            {% if product.discounted_units == 0 %}
+                <div><h5>Stock: {{ product.stock_quantity }}</h5></div><br>
+                <div><h4>Price: {{ product.price }}$</h4></div><br>
+            {% else %}
+                <div><h5>Discount stock: {{ product.discounted_units }}</h5></div><br>
+                <div><h5>Discount: <span class="discount-text">{{ product.discount }}% OFF!!</span></h5></div><br>
+                <div><h5>Old price: <span class="old-price">{{ product.price }}$</span></h5></div><br>
+                <div><h4>Price: {{ discounted_price|floatformat:2 }}$</h4></div><br>
+            {% endif %}
+            <div>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ max_units }}">
+                {% if user.is_authenticated %}
+                <button id="wishlist-button" 
+                        class="wishlist-button {% if is_in_wishlist %}in-wishlist{% endif %}" 
+                        data-add-url="{% url 'store:add_to_wishlist' %}" 
+                        data-remove-url="{% url 'store:remove_from_wishlist' %}"
+                        data-product-id="{{ product.id }}"
+                        data-category-name="{{ product.category.name }}">
+                    Wishlist
+                </button>
+                {% endif %}
+                <button id="add-to-cart-button" class="btn btn-outline-secondary mt-3 btn-sm"
+                        data-add-to-cart-url="{% url 'store:add_to_cart' %}"
+                        data-product-id="{{ product.id }}"
+                        data-category-name="{{ product.category.name }}"
+                        data-max-units="{{ max_units }}">
+                    Add to Cart
+                </button>
+            </div>           
+        </div>                                                                 
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="product-details">
+                <h3>Product Details</h3>
+                <div class="details-container">
+                    <div class="row">
+                        {% for field, value in product_details.items %}
+                        <div class="col-md-2 detail-item field-column">
+                            <p><strong>{{ field|capfirst }}</strong></p>
+                        </div>
+                        <div class="col-md-10 detail-item value-column">
+                            <p>{{ value }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+

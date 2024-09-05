@@ -1,0 +1,29 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="search_title">Search Results for "{{ query }}"</h2>
+    <div class="row">
+        {% for product, image_url, discounted_price in products_with_images %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <a href="{% url 'store:product_view' product.category.name product.id %}">
+                        <img src="{{ image_url }}" alt="{{ product.title }}" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        {% if discounted_price %}
+                            <div class="price-container">
+                                <p class="card-text discount-text">{{ product.discount }}% OFF</p>
+                                <p class="card-text price-text">{{ discounted_price|floatformat:2 }} $</p>
+                            </div>
+                        {% else %}
+                            <p class="card-text price-text">{{ product.price }} $</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

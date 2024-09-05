@@ -1,0 +1,75 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+<!-- TOP SALES -->
+<h1 class="home-title">TOP SALES</h1>
+<div class="container text-center">
+    <div class="row align-items-start">
+        {% for product, image_url in top_sells %}
+            <div class="col">
+                <a href="{% url 'store:product_view' category_name=product.category.name product_id=product.id %}" class="product-link">
+                    <img src="{{ image_url }}" class="d-block img-fluid" alt="{{ product.title }}" style="max-height: 200px;">
+                    <p class="title-offert">{{ product.title }}</p>
+                    <p class="price-text">{{ product.price|floatformat:2 }} $</p>
+                </a>
+            </div>
+        {% empty %}
+            <p>No top-selling products available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- OFFERTS -->
+<h1 class="home-title">OFFERTS</h1>
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for product, image_url, discounted_price in discounted_products %}
+        <div class="carousel-item {{ forloop.first|yesno:'active,' }}">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <a href="{% url 'store:product_view' category_name=product.category.name product_id=product.id %}" class="product-link">
+                            <img src="{{ image_url }}" class="d-block img-fluid" alt="{{ product.title }}" style="max-height: 200px;">
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-container">
+                            <p class="title-offert">{{ product.title }}</p>
+                            <p class="discount-offert">{{ product.discount }}% OFF!</p>
+                            <p class="price-text-carrusel">{{ discounted_price|floatformat:2 }} $</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- LAST UNITS -->
+<h1 class="home-title">LAST UNITS</h1>
+<div class="container text-center">
+    <div class="row align-items-start">
+        {% for product, image_url in last_units %}
+            <div class="col">
+                <a href="{% url 'store:product_view' category_name=product.category.name product_id=product.id %}" class="product-link">
+                    <img src="{{ image_url }}" class="d-block img-fluid" alt="{{ product.title }}" style="max-height: 200px;">
+                    <p class="title-offert">{{ product.title }}</p>
+                    <p class="price-text">{{ product.price|floatformat:2 }} $</p>
+                </a>
+            </div>
+        {% empty %}
+            <p>No last unit products available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

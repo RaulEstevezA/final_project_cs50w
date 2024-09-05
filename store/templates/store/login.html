@@ -1,0 +1,31 @@
+{% extends 'store/layout.html' %}
+
+{% block content %}
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="w-100" style="max-width: 400px;">
+            {% if message %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            
+            <form action="{% url 'store:login' %}" method="post" class="form-signin">
+                <!-- security -->
+                {% csrf_token %}
+                <!-- login containers -->
+                <h1 class="h3 mb-3 fw-bolt text-center">Login</h1>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="usernameInput" name="username" placeholder="Username" required>
+                    <label for="usernameInput">Username</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="passwordInput" name="password" placeholder="Password" required>
+                    <label for="passwordInput">Password</label>
+                </div>
+                <button class="btn btn-outline-secondary w-100" type="submit">Login</button>
+                <p class="mt-2">Don't have an account? <a href="{% url 'store:register' %}">Register here.</a></p>
+            </form>
+        </div>
+    </div>
+{% endblock %}

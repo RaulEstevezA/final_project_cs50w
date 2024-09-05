@@ -1,0 +1,16 @@
+<!-- payment.html -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+</head>
+<body>
+    <h1>Proceeding to PayPal...</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Pay with PayPal</button>
+    </form>
+</body>
+</html>
